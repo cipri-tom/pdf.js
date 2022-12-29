@@ -2140,11 +2140,8 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
         return;
       }
       const fileOrigin = new URL(file, window.location.href).origin;
-      // Removing of the following line will not guarantee that the viewer will
-      // start accepting URLs from foreign origin -- CORS headers on the remote
-      // server must be properly configured.
-      if (fileOrigin !== viewerOrigin) {
-        throw new Error("file origin does not match viewer's");
+      if (fileOrigin !== "https://arxiv.org") {
+        throw new Error("File should only come from arXiv domain");
       }
     } catch (ex) {
       PDFViewerApplication.l10n.get("loading_error").then(msg => {
